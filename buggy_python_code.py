@@ -25,12 +25,11 @@ def print_nametag(format_string, person):
 
 def fetch_website(urllib_version):
     # Import the requested version (2 or 3) of urllib
-    if urlib_version == 2 or urllib_version == 3:
-        exec(f"import urllib{urllib_version} as urllib", globals())
-        try:
-            pass
-        except Exception:
-            print('Exception')
+    if urlib_version == 2:
+        import urllib2 as urllib
+    if urlib_version == 3:
+        import urllib3 as urllib
+
     # Fetch and print the requested URL
  
 
