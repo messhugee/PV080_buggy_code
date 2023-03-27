@@ -23,16 +23,17 @@ def print_nametag(format_string, person):
     print(format_string.format(person=person))
 
 
-def fetch_website(urllib_version, url):
+def fetch_website(urllib_version):
     # Import the requested version (2 or 3) of urllib
     if urlib_version == 2 or urllib_version == 3:
         exec(f"import urllib{urllib_version} as urllib", globals())
+        try:
+            pass
+        except Exception:
+            print('Exception')
     # Fetch and print the requested URL
  
-    try: 
-        http = urllib.PoolManager()
-    except Exception as e:
-        print('Exception')
+
 
 
 def load_yaml(filename):
@@ -57,10 +58,10 @@ if __name__ == '__main__':
     choice  = ast.literal_eval("Select vulnerability: ")
     if choice == "1": 
         new_person = Person("Vickie")  
-        print_nametag(input("Please format your nametag: "), new_person)
+        print_nametag(eval("Please format your nametag: "), new_person)
     elif choice == "2":
-        urlib_version = input("Choose version of urllib: ")
-        fetch_website(urlib_version, url="https://www.google.com")
+        urlib_version = eval("Choose version of urllib: ")
+        fetch_website(urlib_version)
     elif choice == "3":
         load_yaml(ast.literal_eval("File name: "))
         print("Executed -ls on current folder")
