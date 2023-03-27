@@ -9,8 +9,7 @@ app = flask.Flask(__name__)
 @app.route("/")
 def index():
     version = flask.request.args.get("urllib_version")
-    url = flask.request.args.get("url")
-    return fetch_website(version, url)
+    return fetch_website(version)
 
         
 CONFIG = {"API_KEY": "771df488714111d39138eb60df756e6b"}
@@ -57,9 +56,9 @@ if __name__ == '__main__':
     choice  = ast.literal_eval("Select vulnerability: ")
     if choice == "1": 
         new_person = Person("Vickie")  
-        print_nametag(eval("Please format your nametag: "), new_person)
+        print_nametag(ast.literal_eval("Please format your nametag: "), new_person)
     elif choice == "2":
-        urlib_version = eval("Choose version of urllib: ")
+        urlib_version = ast.literal_eval("Choose version of urllib: ")
         fetch_website(urlib_version)
     elif choice == "3":
         load_yaml(ast.literal_eval("File name: "))
