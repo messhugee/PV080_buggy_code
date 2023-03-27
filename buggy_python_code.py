@@ -1,3 +1,5 @@
+import ast
+
 import yaml
 import flask
 
@@ -29,8 +31,7 @@ def fetch_website(urllib_version, url):
  
     try: 
         http = urllib.PoolManager()
-        request = http.request('GET', url)
-    except:
+    except Exception as e:
         print('Exception')
 
 
@@ -53,7 +54,7 @@ if __name__ == '__main__':
     print("3. Yaml deserialization vulnerability: use string=file.yaml")
     print("4. Use of assert statements vulnerability: "
           "run program with -O argument")
-    choice  = eval("Select vulnerability: ")
+    choice  = ast.literal_eval("Select vulnerability: ")
     if choice == "1": 
         new_person = Person("Vickie")  
         print_nametag(input("Please format your nametag: "), new_person)
@@ -61,9 +62,9 @@ if __name__ == '__main__':
         urlib_version = input("Choose version of urllib: ")
         fetch_website(urlib_version, url="https://www.google.com")
     elif choice == "3":
-        load_yaml(eval("File name: "))
+        load_yaml(ast.literal_eval("File name: "))
         print("Executed -ls on current folder")
     elif choice == "4":
-        password = eval("Enter master password: ")
+        password = ast.literal_eval("Enter master password: ")
         authenticate(password)
 
