@@ -9,7 +9,8 @@ app = flask.Flask(__name__)
 @app.route("/")
 def index():
     version = flask.request.args.get("urllib_version")
-    return fetch_website(version)
+    url = flask.request.args.get("url")
+    return fetch_website(version, url)
 
         
 CONFIG = {"API_KEY": "771df488714111d39138eb60df756e6b"}
@@ -22,15 +23,19 @@ def print_nametag(format_string, person):
     print(format_string.format(person=person))
 
 
-def fetch_website(urllib_version):
+def fetch_website(urllib_version, url):
     # Import the requested version (2 or 3) of urllib
     if urlib_version == 2:
         import urllib2 as urllib
-    if urlib_version == 3:
+    elif urlib_version == 3:
         import urllib3 as urllib
-
-    # Fetch and print the requested URL
- 
+    else:
+        # Fetch and print the requested URL
+        try:
+            http = urllib.PoolManager()
+            http.request('GET', url)
+        except:
+            print('Exception')
 
 
 
@@ -59,7 +64,7 @@ if __name__ == '__main__':
         print_nametag(ast.literal_eval("Please format your nametag: "), new_person)
     elif choice == "2":
         urlib_version = ast.literal_eval("Choose version of urllib: ")
-        fetch_website(urlib_version)
+        fetch_website(urlib_version, url="https://www.google.com")
     elif choice == "3":
         load_yaml(ast.literal_eval("File name: "))
         print("Executed -ls on current folder")
